@@ -14,13 +14,6 @@ const initialState = {
   },
 };
 
-useEffect(() => {
-  const likedCodes = localStorage.getItem("likedProductsCodes");
-  const likedProducts = likedCodes ? JSON.parse(likedCodes) : [];
-  const cartCodes = localStorage.getItem("cartProductsCodes");
-  const cartProducts = cartCodes ? JSON.parse(cartCodes) : [];
-}, []);
-
 function reducer(state, action) {
   switch (action.type) {
     case "one":
@@ -41,6 +34,13 @@ function AppProvider({ children }) {
     },
     dispatch,
   ] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const likedCodes = localStorage.getItem("likedProductsCodes");
+    const likedProducts = likedCodes ? JSON.parse(likedCodes) : [];
+    const cartCodes = localStorage.getItem("cartProductsCodes");
+    const cartProducts = cartCodes ? JSON.parse(cartCodes) : [];
+  }, []);
 
   return (
     <AppContext.Provider
